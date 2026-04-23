@@ -161,21 +161,3 @@ Each alert rule targets a specific service and condition. When triggered, the Al
 | PagerDuty | API key for on-call incident escalation |
 
 ---
-
-## Tech Stack
-
-| | |
-|---|---|
-| Frontend | Next.js 14, React, Vanilla CSS |
-| Observability Protocol | OpenTelemetry (OTLP) |
-| Alerting | Slack Webhooks, PagerDuty Events API |
-
----
-
-## What's Coming
-
-- **Custom Dashboards** — drag-and-drop widget builder for your own views
-- **Anomaly Detection** — automatic alerting based on learned baselines
-- **Team Access Control** — role-based permissions for engineering teams
-- **Multi-Environment Comparison** — compare production vs staging side-by-side
-- **Audit Logs** — see who viewed or changed what, and when
