@@ -329,29 +329,38 @@ export default function Page() {
           <div className="nav-section">Observe</div>
           <div className={`nav-item ${currentTab === 'overview' ? 'active' : ''}`} onClick={() => { setCurrentTab('overview'); setSelectedMetricId(null); setSelectedAlertId(null); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">◈</span> Overview
+            <span className="nav-tip"><div className="nav-tip-title">Overview</div>Your command centre — request volumes, error rates, latency, and a live map of all services at a glance.</span>
           </div>
           <div className={`nav-item ${currentTab === 'traces' ? 'active' : ''}`} onClick={() => { setCurrentTab('traces'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⇢</span> Traces
+            <span className="nav-tip"><div className="nav-tip-title">Distributed Traces</div>Follow any request end-to-end across every service it touched. Pinpoint exactly where slowdowns and errors occur.</span>
           </div>
           <div className={`nav-item ${currentTab === 'logs' ? 'active' : ''}`} onClick={() => { setCurrentTab('logs'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">≡</span> Logs
+            <span className="nav-tip"><div className="nav-tip-title">Logs & Events</div>A live stream of structured log events from all services. Filter by severity, search by keyword, and jump to related traces.</span>
           </div>
           <div className={`nav-item ${currentTab === 'metrics' ? 'active' : ''}`} onClick={() => { setCurrentTab('metrics'); setSelectedMetricId(null); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">▲</span> Metrics
+            <span className="nav-tip"><div className="nav-tip-title">System Metrics</div>Time-series charts for CPU, memory, latency percentiles, and throughput. Spot performance trends before they become incidents.</span>
           </div>
+          {/* SYNTHETICS NAV — commented out for now
           <div className={`nav-item ${currentTab === 'synthetics' ? 'active' : ''}`} onClick={() => { setCurrentTab('synthetics'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">🌐</span> Synthetics
           </div>
+          */}
           <div className={`nav-item ${currentTab === 'alerts' ? 'active' : ''}`} onClick={() => { setCurrentTab('alerts'); setSelectedAlertId(null); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⚠</span> Alerts
+            <span className="nav-tip"><div className="nav-tip-title">Alerts</div>Automated threshold rules that fire when something needs attention. Click any alert to see the exact moment it breached.</span>
           </div>
           <div className={`nav-item ${currentTab === 'dashboards' ? 'active' : ''}`} onClick={() => { setCurrentTab('dashboards'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⊞</span> Dashboards
+            <span className="nav-tip"><div className="nav-tip-title">Dashboards</div>Pre-built operational views for common monitoring scenarios. One click to load a focused layout for your team.</span>
           </div>
 
           <div className="nav-section">Services</div>
           <div className={`nav-item ${currentTab === 'services' ? 'active' : ''}`} onClick={() => { setCurrentTab('services'); setSelectedServiceId(null); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⊞</span> Topology
+            <span className="nav-tip"><div className="nav-tip-title">Service Topology</div>A live map of every service — health status, error rate, latency, and throughput at a glance. Click any service to drill in.</span>
           </div>
           {SERVICES.map(service => (
             <div key={service.id} className={`nav-item ${currentTab === `service-detail` && selectedServiceId === service.id ? 'active' : ''}`} onClick={() => { setSelectedServiceId(service.id); setCurrentTab('service-detail'); setSidebarOpen(false); }} style={{ cursor: 'pointer', fontSize: '11px', paddingTop: '6px', paddingBottom: '6px' }}>
@@ -362,13 +371,16 @@ export default function Page() {
           <div className="nav-section">Data Management</div>
           <div className={`nav-item ${currentTab === 'sample-data' ? 'active' : ''}`} onClick={() => { setCurrentTab('sample-data'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⬇</span> Sample Data
+            <span className="nav-tip"><div className="nav-tip-title">Sample Data</div>Load a realistic demo dataset instantly — no live system needed. Four themed datasets covering eCommerce, SaaS, Fintech, and IoT.</span>
           </div>
 
           <div className="nav-section">Configure</div>
           <div className={`nav-item ${currentTab === 'settings' ? 'active' : ''}`} onClick={() => { setCurrentTab('settings'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⚙</span> Settings
+            <span className="nav-tip"><div className="nav-tip-title">Settings</div>Configure your environment name, data retention period, and integrations — Slack for notifications, PagerDuty for on-call escalation.</span>
           </div>
         </nav>
+
 
         <div className="sidebar-bottom">
           <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
@@ -414,6 +426,13 @@ export default function Page() {
           {/* OVERVIEW TAB */}
           {currentTab === 'overview' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">◈</div>
+                <div className="page-intro-text">
+                  <h2>Overview</h2>
+                  <p>Your command centre. See total requests, error rates, and service health — all in one place. Use the time range buttons to zoom in or out.</p>
+                </div>
+              </div>
               <div className="alert-strip">
                 <span className="alert-icon">⚠</span>
                 <strong style={{ color: 'var(--warning)' }}>Active Alerts:</strong>&nbsp;
@@ -629,6 +648,13 @@ export default function Page() {
           {/* TRACES TAB */}
           {currentTab === 'traces' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">⇢</div>
+                <div className="page-intro-text">
+                  <h2>Distributed Traces</h2>
+                  <p>See the full journey of any request — which services handled it, how long each step took, and where things went wrong. Click any row to open the full breakdown.</p>
+                </div>
+              </div>
               <div className="table-card">
                 <div className="table-header">
                   <input type="text" className="search-input" placeholder="Search traces by ID or operation..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
@@ -679,6 +705,13 @@ export default function Page() {
           {/* LOGS TAB */}
           {currentTab === 'logs' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">≡</div>
+                <div className="page-intro-text">
+                  <h2>Logs &amp; Events</h2>
+                  <p>A live feed of messages from every service. Filter by level — INFO, WARN, ERROR — or search by keyword. Click any log line to see the full details and jump to its trace.</p>
+                </div>
+              </div>
               <div className="log-stream">
                 <div className="log-toolbar">
                   <input type="text" className="search-input" placeholder="Search logs..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
@@ -729,6 +762,13 @@ export default function Page() {
           {/* METRICS TAB */}
           {currentTab === 'metrics' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">▲</div>
+                <div className="page-intro-text">
+                  <h2>System Metrics</h2>
+                  <p>Charts showing how the system is performing over time — CPU, memory, response times, and request volume. Bars turn amber or red when a value is approaching its limit.</p>
+                </div>
+              </div>
               <div className="stats-grid">
                 <div className="stat-card blue">
                   <div className="stat-label">CPU Usage</div>
@@ -830,6 +870,13 @@ export default function Page() {
           {/* ALERTS TAB */}
           {currentTab === 'alerts' && !selectedAlertId && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">⚠</div>
+                <div className="page-intro-text">
+                  <h2>Alerts</h2>
+                  <p>Rules that watch the system and flag problems automatically. Red means it's been triggered right now. Click any card to see exactly when and how it happened.</p>
+                </div>
+              </div>
               <div className="section-divider">
                 <div className="section-divider-title">Alert Rules</div>
                 <div className="section-divider-line"></div>
@@ -915,6 +962,13 @@ export default function Page() {
           {/* DASHBOARDS TAB */}
           {currentTab === 'dashboards' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">⊞</div>
+                <div className="page-intro-text">
+                  <h2>Dashboards</h2>
+                  <p>Ready-made views for common monitoring needs — web traffic, application performance, eCommerce orders, and more. Click any card to load it.</p>
+                </div>
+              </div>
               <div className="section-divider">
                 <div className="section-divider-title">Saved Dashboards</div>
                 <div className="section-divider-line"></div>
@@ -935,6 +989,13 @@ export default function Page() {
           {/* SETTINGS TAB */}
           {currentTab === 'settings' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">⚙</div>
+                <div className="page-intro-text">
+                  <h2>Settings</h2>
+                  <p>Set your environment name, choose how long to keep data, and connect notification tools like Slack or PagerDuty so the right people get alerted automatically.</p>
+                </div>
+              </div>
               <div className="section-divider">
                 <div className="section-divider-title">General Settings</div>
                 <div className="section-divider-line"></div>
@@ -1012,8 +1073,8 @@ export default function Page() {
               </div>
             </>
           )}
-          {/* SYNTHETICS TAB */}
-          {currentTab === 'synthetics' && (
+          {/* SYNTHETICS TAB — commented out for now */}
+          {false && currentTab === 'synthetics' && (
             <div className="tab-pane active">
               <div className="stats-grid">
                 <div className="stat-card green">
@@ -1082,6 +1143,13 @@ export default function Page() {
           {/* SERVICES TAB */}
           {currentTab === 'services' && (
             <>
+              <div className="page-intro">
+                <div className="page-intro-icon">⊞</div>
+                <div className="page-intro-text">
+                  <h2>Service Topology</h2>
+                  <p>A live snapshot of every service — whether it's healthy, how fast it's responding, and how many requests it's handling. Click any service card to drill in for more detail.</p>
+                </div>
+              </div>
               <div className="stats-grid">
                 <div className="stat-card green">
                   <div className="stat-label">Healthy Services</div>
@@ -1285,6 +1353,13 @@ export default function Page() {
             ];
             return (
               <>
+                <div className="page-intro">
+                  <div className="page-intro-icon">⬇</div>
+                  <div className="page-intro-text">
+                    <h2>Sample Data</h2>
+                    <p>No live system? No problem. Pick any dataset below and click Import — the whole dashboard updates instantly with realistic data so you can explore every feature.</p>
+                  </div>
+                </div>
                 <div className="section-divider">
                   <div className="section-divider-title">Import Sample Datasets</div>
                   <div className="section-divider-line"></div>
