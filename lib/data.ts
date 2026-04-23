@@ -190,7 +190,7 @@ export function generateMetrics(timeRangeHours: number = 24) {
   return metrics
 }
 
-export function filterByTimeRange(items: any[], timeRangeKey: string, timeField: string = 'timestamp' | 'startTime') {
+export function filterByTimeRange(items: any[], timeRangeKey: string, timeField: string = 'timestamp') {
   const now = Date.now()
   let hoursBack = 7
 

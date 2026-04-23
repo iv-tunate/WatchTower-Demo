@@ -122,7 +122,7 @@ function generateTraces(count: number, timeRange: number): Trace[] {
       duration,
       status,
       spans,
-      errors: status !== 'success' ? ['Request timeout', 'Service unavailable', 'Invalid input'][Math.floor(Math.random() * 3)] : undefined,
+      errors: status !== 'success' ? [['Request timeout', 'Service unavailable', 'Invalid input'][Math.floor(Math.random() * 3)]] : undefined,
     });
   }
 
