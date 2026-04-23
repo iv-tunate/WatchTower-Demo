@@ -465,6 +465,17 @@ body {
   margin-bottom: 24px;
 }
 
+/* SIDEBAR BACKDROP */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 150;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
 .chart-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -592,6 +603,11 @@ canvas { max-height: 200px; }
   border-radius: 8px;
   margin-bottom: 24px;
   overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-card table {
+  min-width: 560px;
 }
 
 .table-header {
@@ -827,8 +843,76 @@ tr:last-child td { border-bottom: none; }
   .sidebar.open {
     transform: translateX(0);
   }
+  .sidebar-backdrop {
+    display: block;
+  }
   .main { margin-left: 0; }
+
+  /* Stats: 2 cols on mobile */
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .charts-row { grid-template-columns: 1fr; }
+
+  /* Charts: horizontal scroll strip instead of stacking */
+  .charts-row {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  .charts-row .chart-card {
+    min-width: 260px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  /* Tables scroll horizontally */
+  .table-card { overflow-x: auto; }
+  .table-card table { min-width: 560px; }
+
+  /* Log entries — simplified layout on mobile */
+  .log-entry {
+    grid-template-columns: 80px 50px 1fr;
+    font-size: 10px;
+  }
+  .log-service { display: none; }
+
+  /* Content padding */
+  .content { padding: 12px; }
+
+  /* Topbar */
+  .topbar { padding: 0 12px; gap: 8px; }
+  .time-range { display: none; }
+
+  /* Page intro */
+  .page-intro { padding: 10px 12px; }
+
+  /* Mobile menu btn */
   .mobile-menu-btn { display: block !important; }
+
+  /* Service topology grid — 1 col on mobile */
+  .service-topology-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Alert cards grid — 1 col on mobile */
+  .alert-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Dashboard cards grid — 1 col on mobile */
+  .dashboard-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Sample data grid — 1 col on mobile */
+  .sample-data-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Inline grids used for settings */
+  .settings-fields-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

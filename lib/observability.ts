@@ -1,9 +1,9 @@
 // Generic microservices for monitoring (not ecommerce specific)
 export const SERVICES = [
   { id: 'api-gw', name: 'API Gateway', icon: '🌐', type: 'Gateway', uptime: 99.98, avgLatency: 12, errorRate: 0.02, rps: 15420, instances: 8 },
-  { id: 'auth', name: 'Auth Service', icon: '🔐', type: 'Service', uptime: 99.99, avgLatency: 45, errorRate: 0.01, rps: 2840, instances: 4 },
+  // { id: 'auth', name: 'Auth Service', icon: '🔐', type: 'Service', uptime: 99.99, avgLatency: 45, errorRate: 0.01, rps: 2840, instances: 4 }, // commented out — demo traces not realistic for auth
   { id: 'db', name: 'Database', icon: '💾', type: 'Database', uptime: 99.95, avgLatency: 28, errorRate: 0.15, rps: 8420, instances: 3 },
-  { id: 'cache', name: 'Cache Layer', icon: '⚡', type: 'Cache', uptime: 99.97, avgLatency: 2, errorRate: 0.03, rps: 42000, instances: 2 },
+  // { id: 'cache', name: 'Cache Layer', icon: '⚡', type: 'Cache', uptime: 99.97, avgLatency: 2, errorRate: 0.03, rps: 42000, instances: 2 }, // commented out — data not realistic enough
   { id: 'queue', name: 'Message Queue', icon: '📨', type: 'Queue', uptime: 99.92, avgLatency: 15, errorRate: 0.25, rps: 3200, instances: 5 },
   { id: 'search', name: 'Search Engine', icon: '🔍', type: 'Search', uptime: 99.88, avgLatency: 120, errorRate: 0.35, rps: 1200, instances: 2 },
   { id: 'worker', name: 'Background Workers', icon: '⚙️', type: 'Worker', uptime: 99.85, avgLatency: 2500, errorRate: 0.45, rps: 450, instances: 6 },

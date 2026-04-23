@@ -315,6 +315,11 @@ export default function Page() {
 
   return (
     <>
+      {/* MOBILE SIDEBAR BACKDROP */}
+      {sidebarOpen && (
+        <div className="sidebar-backdrop" onClick={() => setSidebarOpen(false)} />
+      )}
+
       {/* SIDEBAR */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="logo">
@@ -368,12 +373,13 @@ export default function Page() {
             </div>
           ))}
 
+          {/* DATA MANAGEMENT — commented out for now
           <div className="nav-section">Data Management</div>
           <div className={`nav-item ${currentTab === 'sample-data' ? 'active' : ''}`} onClick={() => { setCurrentTab('sample-data'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⬇</span> Sample Data
             <span className="nav-tip"><div className="nav-tip-title">Sample Data</div>Load a realistic demo dataset instantly — no live system needed. Four themed datasets covering eCommerce, SaaS, Fintech, and IoT.</span>
           </div>
-
+          */}
           <div className="nav-section">Configure</div>
           <div className={`nav-item ${currentTab === 'settings' ? 'active' : ''}`} onClick={() => { setCurrentTab('settings'); setSidebarOpen(false); }} style={{ cursor: 'pointer' }}>
             <span className="icon">⚙</span> Settings
@@ -883,7 +889,7 @@ export default function Page() {
                 <span className="badge badge-red">{ALERT_RULES.filter(a => a.triggered).length} triggered</span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
+              <div className="alert-cards-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' }}>
                 {ALERT_RULES.map((alert, idx) => (
                   <div key={idx} className={`chart-card`} onClick={() => setSelectedAlertId(alert.id)} style={{ cursor: 'pointer', borderLeft: `3px solid ${alert.triggered ? 'var(--danger)' : 'var(--success)'}`, transition: 'border-color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--border-bright)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}>
                     <div className="chart-header">
@@ -974,7 +980,7 @@ export default function Page() {
                 <div className="section-divider-line"></div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
+              <div className="dashboard-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
                 {DASHBOARDS.map((dash, idx) => (
                   <div key={idx} className="chart-card" style={{ cursor: 'pointer', transition: 'border-color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--border-bright)'} onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}>
                     <div style={{ fontSize: '24px', marginBottom: '8px' }}>{dash.icon}</div>
@@ -1180,7 +1186,7 @@ export default function Page() {
               </div>
 
               {/* Service health grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+              <div className="service-topology-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px', marginBottom: '24px' }}>
                 {SERVICES.map(svc => {
                   const healthColor = svc.uptime >= 99.9 ? 'var(--success)' : svc.uptime >= 99 ? 'var(--warning)' : 'var(--danger)';
                   const errColor = svc.errorRate < 0.3 ? 'var(--success)' : svc.errorRate < 1 ? 'var(--warning)' : 'var(--danger)';
@@ -1372,7 +1378,7 @@ export default function Page() {
                   </div>
                 )}
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
+                <div className="sample-data-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
                   {datasets.map(ds => (
                     <div key={ds.id} className="chart-card" style={{ borderTop: importedDataset === ds.id ? '3px solid var(--success)' : '3px solid var(--border)' }}>
                       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
